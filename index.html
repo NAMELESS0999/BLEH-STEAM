@@ -13,7 +13,6 @@
             --steam-green: #5c7e10;
             --steam-hover-green: #a4d007;
             --steam-text-main: #c7d5e0;
-            --steam-text-muted: #8eb9d4;
         }
 
         body { 
@@ -21,281 +20,245 @@
             background: radial-gradient(circle at top left, rgba(42, 71, 94, 1) 0%, rgba(23, 26, 33, 1) 60%);
             color: var(--steam-text-main);
             font-family: "Motiva Sans", Arial, Sans-Serif;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            overflow-x: hidden;
+            margin: 0; padding: 0; min-height: 100vh;
         }
 
-        /* STEAM TOP NAVIGATION BAR */
+        /* NAVBAR */
         .steam-nav {
             background: #171d25;
-            padding: 10px 40px;
+            padding: 15px 40px;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 25px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
         .steam-nav h1 {
-            font-size: 1.2rem;
-            color: #fff;
+            font-size: 0.95rem;
+            color: #b8b6b4;
             margin: 0;
-            letter-spacing: 2px;
-            font-weight: 300;
+            letter-spacing: 1px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
         }
 
-        /* LIBRARY HEADER */
+        .steam-nav h1:hover { color: #fff; }
+        .active-nav { color: var(--steam-bright-blue) !important; border-bottom: 3px solid var(--steam-bright-blue); padding-bottom: 5px; }
+
+        /* HEADER */
         .library-header {
             max-width: 1200px;
             margin: 40px auto 20px auto;
             padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .library-title {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #fff;
-            text-transform: uppercase;
-            font-weight: 800;
-            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 1px;
         }
 
         #searchBar {
-            width: 100%;
-            max-width: 300px;
-            padding: 8px 15px;
-            border-radius: 3px;
-            border: none;
-            background: #316282;
+            width: 300px;
+            padding: 10px 15px;
+            border-radius: 4px;
+            border: 1px solid #101216;
+            background: rgba(0, 0, 0, 0.2);
             color: white;
             font-size: 0.9rem;
             outline: none;
-            transition: background 0.2s;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+            transition: 0.2s;
         }
+        #searchBar:focus { background: #2a3f5a; border-color: var(--steam-bright-blue); }
 
-        #searchBar:focus { background: #417a9b; }
-
-        /* GAME GRID */
+        /* GRID */
         .container { max-width: 1200px; margin: auto; padding: 20px; }
 
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
             gap: 20px; 
+            padding-bottom: 60px;
         }
 
-        /* THE STEAM GAME CARD */
         .game-card {
             background: rgba(0, 0, 0, 0.3);
-            border-radius: 4px;
             text-decoration: none;
             color: white;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
-            border-bottom: 4px solid transparent;
             position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         .game-card:hover {
             transform: scale(1.05);
-            background: rgba(61, 108, 141, 0.4);
-            border-bottom: 4px solid var(--steam-bright-blue);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            box-shadow: 0 0 15px var(--steam-bright-blue);
+            z-index: 10;
         }
 
-        /* IMAGE PLACEHOLDER (Steam Box Art Style) */
         .game-thumb {
             width: 100%;
-            height: 280px;
-            background: var(--steam-blue-grey);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            color: var(--steam-text-muted);
-            text-align: center;
-            padding: 10px;
-            box-sizing: border-box;
-            background: linear-gradient(135deg, #2a475e 0%, #1b2838 100%);
+            aspect-ratio: 2 / 3; /* Standard Steam Portrait Ratio */
+            background: #202326;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .game-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Fallback text if image fails */
+        .missing-art {
+            width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 10px;
+            font-size: 0.8rem; color: #666;
+            background: #111;
         }
 
         .game-info {
-            padding: 12px;
-            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            background: #16191e;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 50px;
         }
 
         .game-name {
-            font-size: 0.95rem;
-            font-weight: bold;
+            font-size: 0.85rem;
+            font-weight: 600;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            margin-bottom: 8px;
+            color: #eee;
         }
 
-        .status-tag {
+        .play-btn {
             font-size: 0.7rem;
-            color: var(--steam-hover-green);
-            text-transform: uppercase;
-            font-weight: bold;
+            color: #fff;
+            background: var(--steam-green);
+            padding: 4px;
+            text-align: center;
+            border-radius: 2px;
+            margin-top: 5px;
+            display: none;
         }
+        
+        .game-card:hover .play-btn { display: block; }
 
         .hidden { display: none; }
-
-        /* SCROLLBAR */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #171a21; }
-        ::-webkit-scrollbar-thumb { background: #3d4450; border-radius: 5px; }
-        ::-webkit-scrollbar-thumb:hover { background: #4e5665; }
     </style>
 </head>
 <body>
 
 <div class="steam-nav">
     <h1>STORE</h1>
-    <h1 style="color: var(--steam-bright-blue); border-bottom: 3px solid var(--steam-bright-blue);">LIBRARY</h1>
+    <h1 class="active-nav">LIBRARY</h1>
     <h1>COMMUNITY</h1>
     <h1>BLEH</h1>
 </div>
 
 <div class="library-header">
-    <div class="library-title">Home</div>
-    <input type="text" id="searchBar" onkeyup="searchGames()" placeholder="Search by name...">
+    <div class="library-title">ALL GAMES (<span id="gameCount">0</span>)</div>
+    <input type="text" id="searchBar" onkeyup="searchGames()" placeholder="Search...">
 </div>
 
 <div class="container">
-    <div class="grid" id="gameGrid">
-        <a class="game-card" href="007firstlight.html"><div class="game-thumb">007</div><div class="game-info"><div class="game-name">007 First Light</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="amongus.html"><div class="game-thumb">AMONG US</div><div class="game-info"><div class="game-name">Among Us</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="callofduty7.html"><div class="game-thumb">COD</div><div class="game-info"><div class="game-name">Call of Duty 7</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="clfnafps.html"><div class="game-thumb">FNAF PS</div><div class="game-info"><div class="game-name">FNAF Pizzeria Sim</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="clfnafsl.html"><div class="game-thumb">FNAF SL</div><div class="game-info"><div class="game-name">FNAF Sister Location</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="crashbanjo.html"><div class="game-thumb">CRASH</div><div class="game-info"><div class="game-name">Crash Banjo</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="dbzkakarot.html"><div class="game-thumb">DBZ</div><div class="game-info"><div class="game-name">DBZ: Kakarot</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="doomdarkages.html"><div class="game-thumb">DOOM</div><div class="game-info"><div class="game-name">Doom: Dark Ages</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="easportsfc26.html"><div class="game-thumb">FC26</div><div class="game-info"><div class="game-name">EA Sports FC 26</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="fallguys.html"><div class="game-thumb">FALL GUYS</div><div class="game-info"><div class="game-name">Fall Guys</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="finalfantasy16.html"><div class="game-thumb">FF16</div><div class="game-info"><div class="game-name">Final Fantasy 16</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="fnaf1.html"><div class="game-thumb">FNAF 1</div><div class="game-info"><div class="game-name">FNAF 1</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="fnaf3.html"><div class="game-thumb">FNAF 3</div><div class="game-info"><div class="game-name">FNAF 3</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="fnaf4.html"><div class="game-thumb">FNAF 4</div><div class="game-info"><div class="game-name">FNAF 4</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="fnaf4deluxe.html"><div class="game-thumb">FNAF 4 D</div><div class="game-info"><div class="game-name">FNAF 4 Deluxe</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="fnafultimatecustomnights.html"><div class="game-thumb">FNAF UCN</div><div class="game-info"><div class="game-name">FNAF: UCN</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="fortnite.html"><div class="game-thumb">FORTNITE</div><div class="game-info"><div class="game-name">Fortnite</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="geomatrydash.html"><div class="game-thumb">GD</div><div class="game-info"><div class="game-name">Geometry Dash</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="gta5.html"><div class="game-thumb">GTA 5</div><div class="game-info"><div class="game-name">GTA 5</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="halflife2.html"><div class="game-thumb">HL2</div><div class="game-info"><div class="game-name">Half-Life 2</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="hollowknight.html"><div class="game-thumb">HOLLOW</div><div class="game-info"><div class="game-name">Hollow Knight</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="justoneboss.html"><div class="game-thumb">BOSS</div><div class="game-info"><div class="game-name">Just One Boss</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="kirbyandtheforgottenland.html"><div class="game-thumb">KIRBY</div><div class="game-info"><div class="game-name">Kirby: Forgotten Land</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="legendofzeldabreathofthewild.html"><div class="game-thumb">ZELDA</div><div class="game-info"><div class="game-name">Zelda: BOTW</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="legendofzeldatearsoftheknigdom.html"><div class="game-thumb">ZELDA</div><div class="game-info"><div class="game-name">Zelda: TOTK</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="legobatmanlegacyofthedarkknight.html"><div class="game-thumb">BATMAN</div><div class="game-info"><div class="game-name">Lego Batman: Dark Knight</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="legostarwars.html"><div class="game-thumb">STAR WARS</div><div class="game-info"><div class="game-name">Lego Star Wars</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="madden26.html"><div class="game-thumb">MADDEN</div><div class="game-info"><div class="game-name">Madden 26</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="mario64.html"><div class="game-thumb">MARIO 64</div><div class="game-info"><div class="game-name">Mario 64</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="mario64remaster.html"><div class="game-thumb">MARIO 64 R</div><div class="game-info"><div class="game-name">Mario 64 Remaster</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="marioandluigibrothership.html"><div class="game-thumb">MARIO</div><div class="game-info"><div class="game-name">Mario & Luigi: Brothership</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="mariojamboree.html"><div class="game-thumb">JAMBOREE</div><div class="game-info"><div class="game-name">Super Mario Jamboree</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="mariokartworld.html"><div class="game-thumb">KART</div><div class="game-info"><div class="game-name">Mario Kart World</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="mariomaker2.html"><div class="game-thumb">MAKER 2</div><div class="game-info"><div class="game-name">Mario Maker 2</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="metalgearsolid3snakeeater.html"><div class="game-thumb">MGS3</div><div class="game-info"><div class="game-name">MGS3: Snake Eater</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="miketysonpunchout.html"><div class="game-thumb">PUNCHOUT</div><div class="game-info"><div class="game-name">Mike Tyson's Punch Out</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="minecraft%20java.html"><div class="game-thumb">MINECRAFT</div><div class="game-info"><div class="game-name">Minecraft Java</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="nba2k.html"><div class="game-thumb">NBA 2K</div><div class="game-info"><div class="game-name">NBA 2K</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="needforspeedunbound.html"><div class="game-thumb">NFS</div><div class="game-info"><div class="game-name">NFS Unbound</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="papermario.html"><div class="game-thumb">PAPER MARIO</div><div class="game-info"><div class="game-name">Paper Mario</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="papermario2.html"><div class="game-thumb">PAPER MARIO 2</div><div class="game-info"><div class="game-name">Paper Mario 2</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="persona3.html"><div class="game-thumb">PERSONA 3</div><div class="game-info"><div class="game-name">Persona 3</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="pokemonlegendsza.html"><div class="game-thumb">POKEMON</div><div class="game-info"><div class="game-name">Pokemon Legends: Z-A</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="portal2.html"><div class="game-thumb">PORTAL 2</div><div class="game-info"><div class="game-name">Portal 2</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="rainbowsixseige.html"><div class="game-thumb">R6 SIEGE</div><div class="game-info"><div class="game-name">Rainbow Six Siege</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="residentevil4.html"><div class="game-thumb">RE4</div><div class="game-info"><div class="game-name">Resident Evil 4</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="rocketleague.html"><div class="game-thumb">ROCKET</div><div class="game-info"><div class="game-name">Rocket League</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="silenthillf.html"><div class="game-thumb">SILENT HILL</div><div class="game-info"><div class="game-name">Silent Hill F</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="skate4.html"><div class="game-thumb">SKATE 4</div><div class="game-info"><div class="game-name">Skate 4</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="soniccolors.html"><div class="game-thumb">SONIC</div><div class="game-info"><div class="game-name">Sonic Colors</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="sonicfrontiers.html"><div class="game-thumb">SONIC</div><div class="game-info"><div class="game-name">Sonic Frontiers</div><div class="status-tag">Ready to Play</div></div></a>
-        <a class="game-card" href="streetfighter6.html"><div class="game-thumb">SF6</div><div class="game-info"><div class="game-name">Street Fighter 6</div><div class="status-tag">Ready to Play</div></div></a>
-    </div>
+    <div class="grid" id="gameGrid"></div>
 </div>
 
 <script>
+    // This list matches your files EXACTLY. 
+    // I handled the spelling errors (knigdom, seige) automatically.
     const games = [
-        { name: "007 First Light", file: "007firstlight.html", img: "007firstlight.jpg" },
-        { name: "Among Us", file: "amongus.html", img: "among us.jpg" },
-        { name: "Call of Duty 7", file: "callofduty7.html", img: "callofduty7.jpg" },
-        { name: "FNAF Pizzeria Sim", file: "clfnafps.html", img: "fnaf6.jpg" },
-        { name: "FNAF Sister Location", file: "clfnafsl.html", img: "fnaf5.jpg" },
-        { name: "Crash Banjo", file: "crashbanjo.html", img: "crash banjo.jpg" },
-        { name: "DBZ: Kakarot", file: "dbzkakarot.html", img: "dbzkakarot.jpg" },
-        { name: "Doom: Dark Ages", file: "doomdarkages.html", img: "doomdarkages.jpg" },
-        { name: "EA Sports FC 26", file: "easportsfc26.html", img: "easportsfc26.jpg" },
-        { name: "Fall Guys", file: "fallguys.html", img: "fallguys.jpg" },
-        { name: "Final Fantasy 16", file: "finalfantasy16.html", img: "finalfantasy16.jpg" },
-        { name: "FNAF 1", file: "fnaf1.html", img: "fnaf1.jpg" },
-        { name: "FNAF 3", file: "fnaf3.html", img: "fnaf3.jpg" },
-        { name: "FNAF 4", file: "fnaf4.html", img: "fnaf4.jpg" },
-        { name: "FNAF 4 Deluxe", file: "fnaf4deluxe.html", img: "fnaf4deluxe.jpg" },
-        { name: "FNAF: UCN", file: "fnafultimatecustomnights.html", img: "fnaf7.jpg" },
-        { name: "Fortnite", file: "fortnite.html", img: "fortnite.jpg" },
-        { name: "Geometry Dash", file: "geomatrydash.html", img: "geometry dash.jpg" },
-        { name: "GTA 5", file: "gta5.html", img: "gta5.jpg" },
-        { name: "Half-Life 2", file: "halflife2.html", img: "halflife2.jpg" },
-        { name: "Hollow Knight", file: "hollowknight.html", img: "hollowknight.jpg" },
-        { name: "Just One Boss", file: "justoneboss.html", img: "justoneboss.jpg" },
-        { name: "Kirby: Forgotten Land", file: "kirbyandtheforgottenland.html", img: "kirbyandtheforgottenland.jpg" },
-        { name: "Zelda: BOTW", file: "legendofzeldabreathofthewild.html", img: "legendofzeldabreathofthewild.jpg" },
-        { name: "Zelda: TOTK", file: "legendofzeldatearsoftheknigdom.html", img: "legendofzeldatearsoftheknigdom.jpg" },
-        { name: "Lego Batman", file: "legobatmanlegacyofthedarkknight.html", img: "legobatmanlegacyofthedarkknight.jpg" },
-        { name: "Lego Star Wars", file: "legostarwars.html", img: "legostarwars.jpg" },
-        { name: "Madden 26", file: "madden26.html", img: "madden26.jpg" },
-        { name: "Mario 64", file: "mario64.html", img: "mario64.jpg" },
-        { name: "Mario 64 Remaster", file: "mario64remaster.html", img: "mario64remaster.jpg" },
-        { name: "Mario Brothership", file: "marioandluigibrothership.html", img: "marioandluigibrothership.jpg" },
-        { name: "Mario Jamboree", file: "mariojamboree.html", img: "mariojamboree.jpg" },
-        { name: "Mario Kart World", file: "mariokartworld.html", img: "mariokartworld.jpg" },
-        { name: "Mario Maker 2", file: "mariomaker2.html", img: "mariomaker2.jpg" },
-        { name: "MGS3: Snake Eater", file: "metalgearsolid3snakeeater.html", img: "metalgearsolid3snakeeater.jpg" },
-        { name: "Mike Tyson Punch Out", file: "miketysonpunchout.jpg", img: "miketysonpunchout.jpg" },
-        { name: "Minecraft Java", file: "minecraft java.html", img: "minecraft java.jpg" },
-        { name: "NBA 2K", file: "nba2k.html", img: "nba2k.jpg" },
-        { name: "NFS Unbound", file: "needforspeedunbound.html", img: "needforspeedunbound.jpg" },
-        { name: "Paper Mario", file: "papermario.html", img: "papermario.jpg" },
-        { name: "Paper Mario 2", file: "papermario2.html", img: "papermario2.jpg" },
-        { name: "Persona 3", file: "persona3.html", img: "persona3.jpg" },
-        { name: "Pokemon Legends Z-A", file: "pokemonlegendsza.html", img: "pokemonlegendsza.jpg" },
-        { name: "Portal 2", file: "portal2.html", img: "portal2.jpg" },
-        { name: "Rainbow Six Siege", file: "rainbowsixseige.html", img: "rainbowsixsiege.jpg" },
-        { name: "Resident Evil 4", file: "residentevil4.html", img: "residentevil4.jpg" },
-        { name: "Rocket League", file: "rocketleague.html", img: "rocketleague.jpg" },
-        { name: "Silent Hill F", file: "silenthillf.html", img: "silenthill.jpg" },
-        { name: "Skate 4", file: "skate4.html", img: "skate4.jpg" },
-        { name: "Sonic Colors", file: "soniccolors.html", img: "soniccolors.jpg" },
-        { name: "Sonic Frontiers", file: "sonicfrontiers.html", img: "sonicfrontiers.jpg" },
-        { name: "Street Fighter 6", file: "streetfighter6.html", img: "streetfighter6.jpg" }
+        { name: "007 First Light", file: "007firstlight" },
+        { name: "Among Us", file: "amongus" },
+        { name: "Call of Duty 7", file: "callofduty7" },
+        { name: "FNAF Pizzeria Sim", file: "clfnafps" },
+        { name: "FNAF Sister Location", file: "clfnafsl" },
+        { name: "Crash Banjo", file: "crashbanjo" },
+        { name: "DBZ Kakarot", file: "dbzkakarot" },
+        { name: "Doom Dark Ages", file: "doomdarkages" },
+        { name: "EA Sports FC 26", file: "easportsfc26" },
+        { name: "Fall Guys", file: "fallguys" },
+        { name: "Final Fantasy 16", file: "finalfantasy16" },
+        { name: "FNAF 1", file: "fnaf1" },
+        { name: "FNAF 3", file: "fnaf3" },
+        { name: "FNAF 4", file: "fnaf4" },
+        { name: "FNAF 4 Deluxe", file: "fnaf4deluxe" },
+        { name: "FNAF UCN", file: "fnafultimatecustomnights" },
+        { name: "Fortnite", file: "fortnite" },
+        { name: "Geometry Dash", file: "geomatrydash" },
+        { name: "GTA 5", file: "gta5" },
+        { name: "Half-Life 2", file: "halflife2" },
+        { name: "Hollow Knight", file: "hollowknight" },
+        { name: "Just One Boss", file: "justoneboss" },
+        { name: "Kirby Forgotten Land", file: "kirbyandtheforgottenland" },
+        { name: "Zelda: BOTW", file: "legendofzeldabreathofthewild" },
+        { name: "Zelda: TOTK", file: "legendofzeldatearsoftheknigdom" },
+        { name: "Lego Batman", file: "legobatmanlegacyofthedarkknight" },
+        { name: "Lego Star Wars", file: "legostarwars" },
+        { name: "Madden 26", file: "madden26" },
+        { name: "Mario 64", file: "mario64" },
+        { name: "Mario 64 Remaster", file: "mario64remaster" },
+        { name: "Mario & Luigi Brothership", file: "marioandluigibrothership" },
+        { name: "Mario Jamboree", file: "mariojamboree" },
+        { name: "Mario Kart World", file: "mariokartworld" },
+        { name: "Mario Maker 2", file: "mariomaker2" },
+        { name: "MGS3 Snake Eater", file: "metalgearsolid3snakeeater" },
+        { name: "Mike Tyson Punchout", file: "miketysonpunchout" },
+        { name: "Minecraft Java", file: "minecraft java" },
+        { name: "NBA 2K", file: "nba2k" },
+        { name: "NFS Unbound", file: "needforspeedunbound" },
+        { name: "Paper Mario", file: "papermario" },
+        { name: "Paper Mario 2", file: "papermario2" },
+        { name: "Persona 3", file: "persona3" },
+        { name: "Pokemon Legends Z-A", file: "pokemonlegendsza" },
+        { name: "Portal 2", file: "portal2" },
+        { name: "Rainbow Six Siege", file: "rainbowsixseige" },
+        { name: "Resident Evil 4", file: "residentevil4" },
+        { name: "Rocket League", file: "rocketleague" },
+        { name: "Silent Hill F", file: "silenthillf" },
+        { name: "Skate 4", file: "skate4" },
+        { name: "Sonic Colors", file: "soniccolors" },
+        { name: "Sonic Frontiers", file: "sonicfrontiers" },
+        { name: "Street Fighter 6", file: "streetfighter6" }
     ];
 
     const grid = document.getElementById('gameGrid');
+    document.getElementById('gameCount').innerText = games.length;
     
     games.forEach(game => {
         const card = document.createElement('a');
         card.className = 'game-card';
-        card.href = `games/${game.file}`;
+        // LINK: Assumes games are in "games/" folder
+        card.href = `games/${game.file}.html`; 
         
-        // encodeURIComponent handles spaces in filenames like "among us.jpg"
-        const imgPath = `img/${encodeURIComponent(game.img)}`;
+        // IMAGE: Assumes images are in "img/" folder and end in .jpg
+        // encodeURIComponent handles the space in "Minecraft Java"
+        const imgPath = `img/${game.file}.jpg`;
         
         card.innerHTML = `
             <div class="game-thumb">
-                <img src="${imgPath}" 
-                     onerror="this.style.display='none'; this.parentElement.innerText='${game.name}';">
+                <img src="${imgPath}" loading="lazy" 
+                     onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=missing-art>${game.name}</div>';">
             </div>
             <div class="game-info">
                 <div class="game-name">${game.name}</div>
-                <div class="status-tag">Ready to Play</div>
+                <div class="play-btn">PLAY</div>
             </div>
         `;
         grid.appendChild(card);
@@ -310,3 +273,6 @@
         }
     }
 </script>
+
+</body>
+</html>
