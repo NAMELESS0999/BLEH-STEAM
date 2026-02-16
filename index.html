@@ -106,7 +106,7 @@
 
         .game-thumb {
             width: 100%;
-            aspect-ratio: 2 / 3; /* Standard Steam Portrait Ratio */
+            aspect-ratio: 2 / 3; 
             background: #202326;
             overflow: hidden;
             position: relative;
@@ -119,7 +119,6 @@
             display: block;
         }
 
-        /* Fallback text if image fails */
         .missing-art {
             width: 100%; height: 100%;
             display: flex; align-items: center; justify-content: center;
@@ -167,8 +166,8 @@
 <div class="steam-nav">
     <h1>STORE</h1>
     <h1 class="active-nav">LIBRARY</h1>
-    <h1>COMMUNITY</h1>
-    <h1>BLEH</h1>
+    <h1 onclick="window.open('https://docs.google.com/presentation/d/1aPZRt3i-KAH3ywYYWt6Cajgz4-J2yGw75qpmpllcBmc/edit?usp=sharing', '_blank')">COMMUNITY</h1>
+    <h1 onclick="window.open('https://discord.com/invite/NzPpXVurAq', '_blank')">BLEH</h1>
 </div>
 
 <div class="library-header">
@@ -181,8 +180,6 @@
 </div>
 
 <script>
-    // This list matches your files EXACTLY. 
-    // I handled the spelling errors (knigdom, seige) automatically.
     const games = [
         { name: "007 First Light", file: "007firstlight" },
         { name: "Among Us", file: "amongus" },
@@ -244,11 +241,7 @@
     games.forEach(game => {
         const card = document.createElement('a');
         card.className = 'game-card';
-        // LINK: Assumes games are in "games/" folder
         card.href = `games/${game.file}.html`; 
-        
-        // IMAGE: Assumes images are in "img/" folder and end in .jpg
-        // encodeURIComponent handles the space in "Minecraft Java"
         const imgPath = `img/${game.file}.jpg`;
         
         card.innerHTML = `
