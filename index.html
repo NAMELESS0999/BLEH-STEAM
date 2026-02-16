@@ -223,20 +223,90 @@
 </div>
 
 <script>
+    const games = [
+        { name: "007 First Light", file: "007firstlight.html", img: "007firstlight.jpg" },
+        { name: "Among Us", file: "amongus.html", img: "among us.jpg" },
+        { name: "Call of Duty 7", file: "callofduty7.html", img: "callofduty7.jpg" },
+        { name: "FNAF Pizzeria Sim", file: "clfnafps.html", img: "fnaf6.jpg" },
+        { name: "FNAF Sister Location", file: "clfnafsl.html", img: "fnaf5.jpg" },
+        { name: "Crash Banjo", file: "crashbanjo.html", img: "crash banjo.jpg" },
+        { name: "DBZ: Kakarot", file: "dbzkakarot.html", img: "dbzkakarot.jpg" },
+        { name: "Doom: Dark Ages", file: "doomdarkages.html", img: "doomdarkages.jpg" },
+        { name: "EA Sports FC 26", file: "easportsfc26.html", img: "easportsfc26.jpg" },
+        { name: "Fall Guys", file: "fallguys.html", img: "fallguys.jpg" },
+        { name: "Final Fantasy 16", file: "finalfantasy16.html", img: "finalfantasy16.jpg" },
+        { name: "FNAF 1", file: "fnaf1.html", img: "fnaf1.jpg" },
+        { name: "FNAF 3", file: "fnaf3.html", img: "fnaf3.jpg" },
+        { name: "FNAF 4", file: "fnaf4.html", img: "fnaf4.jpg" },
+        { name: "FNAF 4 Deluxe", file: "fnaf4deluxe.html", img: "fnaf4deluxe.jpg" },
+        { name: "FNAF: UCN", file: "fnafultimatecustomnights.html", img: "fnaf7.jpg" },
+        { name: "Fortnite", file: "fortnite.html", img: "fortnite.jpg" },
+        { name: "Geometry Dash", file: "geomatrydash.html", img: "geometry dash.jpg" },
+        { name: "GTA 5", file: "gta5.html", img: "gta5.jpg" },
+        { name: "Half-Life 2", file: "halflife2.html", img: "halflife2.jpg" },
+        { name: "Hollow Knight", file: "hollowknight.html", img: "hollowknight.jpg" },
+        { name: "Just One Boss", file: "justoneboss.html", img: "justoneboss.jpg" },
+        { name: "Kirby: Forgotten Land", file: "kirbyandtheforgottenland.html", img: "kirbyandtheforgottenland.jpg" },
+        { name: "Zelda: BOTW", file: "legendofzeldabreathofthewild.html", img: "legendofzeldabreathofthewild.jpg" },
+        { name: "Zelda: TOTK", file: "legendofzeldatearsoftheknigdom.html", img: "legendofzeldatearsoftheknigdom.jpg" },
+        { name: "Lego Batman", file: "legobatmanlegacyofthedarkknight.html", img: "legobatmanlegacyofthedarkknight.jpg" },
+        { name: "Lego Star Wars", file: "legostarwars.html", img: "legostarwars.jpg" },
+        { name: "Madden 26", file: "madden26.html", img: "madden26.jpg" },
+        { name: "Mario 64", file: "mario64.html", img: "mario64.jpg" },
+        { name: "Mario 64 Remaster", file: "mario64remaster.html", img: "mario64remaster.jpg" },
+        { name: "Mario Brothership", file: "marioandluigibrothership.html", img: "marioandluigibrothership.jpg" },
+        { name: "Mario Jamboree", file: "mariojamboree.html", img: "mariojamboree.jpg" },
+        { name: "Mario Kart World", file: "mariokartworld.html", img: "mariokartworld.jpg" },
+        { name: "Mario Maker 2", file: "mariomaker2.html", img: "mariomaker2.jpg" },
+        { name: "MGS3: Snake Eater", file: "metalgearsolid3snakeeater.html", img: "metalgearsolid3snakeeater.jpg" },
+        { name: "Mike Tyson Punch Out", file: "miketysonpunchout.jpg", img: "miketysonpunchout.jpg" },
+        { name: "Minecraft Java", file: "minecraft java.html", img: "minecraft java.jpg" },
+        { name: "NBA 2K", file: "nba2k.html", img: "nba2k.jpg" },
+        { name: "NFS Unbound", file: "needforspeedunbound.html", img: "needforspeedunbound.jpg" },
+        { name: "Paper Mario", file: "papermario.html", img: "papermario.jpg" },
+        { name: "Paper Mario 2", file: "papermario2.html", img: "papermario2.jpg" },
+        { name: "Persona 3", file: "persona3.html", img: "persona3.jpg" },
+        { name: "Pokemon Legends Z-A", file: "pokemonlegendsza.html", img: "pokemonlegendsza.jpg" },
+        { name: "Portal 2", file: "portal2.html", img: "portal2.jpg" },
+        { name: "Rainbow Six Siege", file: "rainbowsixseige.html", img: "rainbowsixsiege.jpg" },
+        { name: "Resident Evil 4", file: "residentevil4.html", img: "residentevil4.jpg" },
+        { name: "Rocket League", file: "rocketleague.html", img: "rocketleague.jpg" },
+        { name: "Silent Hill F", file: "silenthillf.html", img: "silenthill.jpg" },
+        { name: "Skate 4", file: "skate4.html", img: "skate4.jpg" },
+        { name: "Sonic Colors", file: "soniccolors.html", img: "soniccolors.jpg" },
+        { name: "Sonic Frontiers", file: "sonicfrontiers.html", img: "sonicfrontiers.jpg" },
+        { name: "Street Fighter 6", file: "streetfighter6.html", img: "streetfighter6.jpg" }
+    ];
+
+    const grid = document.getElementById('gameGrid');
+    
+    games.forEach(game => {
+        const card = document.createElement('a');
+        card.className = 'game-card';
+        card.href = `games/${game.file}`;
+        
+        // encodeURIComponent handles spaces in filenames like "among us.jpg"
+        const imgPath = `img/${encodeURIComponent(game.img)}`;
+        
+        card.innerHTML = `
+            <div class="game-thumb">
+                <img src="${imgPath}" 
+                     onerror="this.style.display='none'; this.parentElement.innerText='${game.name}';">
+            </div>
+            <div class="game-info">
+                <div class="game-name">${game.name}</div>
+                <div class="status-tag">Ready to Play</div>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+
     function searchGames() {
         let input = document.getElementById('searchBar').value.toLowerCase();
         let cards = document.getElementsByClassName('game-card');
-        
         for (let i = 0; i < cards.length; i++) {
             let name = cards[i].innerText.toLowerCase();
-            if (name.includes(input)) {
-                cards[i].classList.remove('hidden');
-            } else {
-                cards[i].classList.add('hidden');
-            }
+            cards[i].classList.toggle('hidden', !name.includes(input));
         }
     }
 </script>
-
-</body>
-</html>
