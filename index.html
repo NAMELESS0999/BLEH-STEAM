@@ -275,7 +275,6 @@
     const grid = document.getElementById('gameGrid');
     document.getElementById('gameCount').innerText = games.length;
     
-    // Alphabetical sort for a cleaner library
     games.sort((a, b) => a.name.localeCompare(b.name));
 
     games.forEach(game => {
