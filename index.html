@@ -191,12 +191,14 @@
         { name: "Burrito Bison", file: "burritobison" },
         { name: "Call of Duty 7", file: "callofduty7" },
         { name: "Chess", file: "chess" },
+        { name: "Classic Minecraft", file: "classicminecraft" },
         { name: "FNAF Pizzeria Sim", file: "clfnafps" },
         { name: "FNAF Sister Location", file: "clfnafsl" },
         { name: "Crash Banjo", file: "crashbanjo" },
         { name: "Cut the Rope", file: "cutrope" },
         { name: "A Dark Room", file: "darkroom" },
         { name: "DBZ Kakarot", file: "dbzkakarot" },
+        { name: "Deltarune", file: "deltarune" },
         { name: "Doge Miner", file: "dogeminer" },
         { name: "Doki Doki Literature Club", file: "dokidokiclub" },
         { name: "Doom Dark Ages", file: "doomdarkages" },
@@ -211,6 +213,7 @@
         { name: "FNAF 4", file: "fnaf4" },
         { name: "FNAF 4 Deluxe", file: "fnaf4deluxe" },
         { name: "FNAF UCN", file: "fnafultimatecustomnights" },
+        { name: "Friday Night Funkin'", file: "fnf" },
         { name: "Fortnite", file: "fortnite" },
         { name: "My Friend Pedro", file: "friendpedro" },
         { name: "Geometry Dash", file: "geomatrydash" },
@@ -222,8 +225,10 @@
         { name: "Henry Stickmin: Diamond", file: "henry diamond" },
         { name: "Henry Stickmin: Prison", file: "henry prison" },
         { name: "Hollow Knight", file: "hollowknight" },
+        { name: "Ice Dodo", file: "icedodo" },
         { name: "Infinite Craft", file: "infinitecraft" },
         { name: "Jacksmith", file: "jacksmith" },
+        { name: "Jetpack Joyride", file: "jetpackjoyride" },
         { name: "Just One Boss", file: "justoneboss" },
         { name: "Kirby Forgotten Land", file: "kirbyandtheforgottenland" },
         { name: "Learn 2 Fly", file: "learn2fly" },
@@ -234,6 +239,7 @@
         { name: "Madden 26", file: "madden26" },
         { name: "Mario 64", file: "mario64" },
         { name: "Mario 64 Remaster", file: "mario64remaster" },
+        { name: "Mario Collection", file: "mariocollection" },
         { name: "Mario & Luigi Brothership", file: "marioandluigibrothership" },
         { name: "Mario Jamboree", file: "mariojamboree" },
         { name: "Mario Kart World", file: "mariokartworld" },
@@ -265,6 +271,7 @@
         { name: "Silent Hill F", file: "silenthillf" },
         { name: "Skate 4", file: "skate4" },
         { name: "Slope", file: "slope" },
+        { name: "Sonic Collection", file: "soniccollection" },
         { name: "Sonic Colors", file: "soniccolors" },
         { name: "Sonic Frontiers", file: "sonicfrontiers" },
         { name: "Stickman Hook", file: "stickmanhook" },
@@ -275,6 +282,7 @@
     const grid = document.getElementById('gameGrid');
     document.getElementById('gameCount').innerText = games.length;
     
+    // Sort alphabetcially by display name
     games.sort((a, b) => a.name.localeCompare(b.name));
 
     games.forEach(game => {
